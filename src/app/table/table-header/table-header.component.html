@@ -3,9 +3,11 @@
     {{ value.header }}
   </div>
   <div class="filter">
-    <i class="pi pi-filter"></i>
+    <i class="pi pi-filter" (click)="onFilterClick()"></i>
   </div>
   <div class="sort">
-    <i class="pi pi-sort-alt"></i>
+    <i class="pi pi-sort-alt" (click)="onSortClick()"></i>
   </div>
+
+  <app-table-filter *ngIf="filterPanelVisibility"></app-table-filter>
 </div>

@@ -1,0 +1,14 @@
+.wrapper {
+  position: absolute;
+  z-index: 1000;
+  height: 200px;
+  width: 180px;
+  background-color: white;
+  /* border: 1px solid #d8d8d8; */
+  border-radius: 0.2rem;
+  -webkit-box-shadow: 0px 10px 15px 1px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0px 10px 15px 1px rgba(34, 60, 80, 0.2);
+  box-shadow: 0px 10px 15px 1px rgba(34, 60, 80, 0.2);
+  top: calc(100% + 0.6rem);
+  left: calc(0px - 1rem);
+}

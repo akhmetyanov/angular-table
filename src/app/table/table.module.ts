@@ -5,9 +5,10 @@ import { StoreModule } from '@ngrx/store';
 import { TableRegisterService } from './services/table-register.service';
 import { TableSourceService } from './services/table-source.service';
 import { TableHeaderComponent } from './table-header/table-header.component';
+import { TableFilterComponent } from './table-filter/table-filter.component';
 
 @NgModule({
-  declarations: [TableComponent, TableHeaderComponent],
+  declarations: [TableComponent, TableHeaderComponent, TableFilterComponent],
   imports: [CommonModule, StoreModule],
   exports: [TableComponent],
   providers: [TableRegisterService, TableSourceService],

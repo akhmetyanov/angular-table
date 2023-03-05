@@ -10,7 +10,15 @@ export class TableHeaderComponent implements OnInit {
   @Input() value!: Column;
   @Input() tableIndex!: number;
 
+  filterPanelVisibility: boolean = false;
+
   constructor() {}
 
   ngOnInit(): void {}
+
+  onFilterClick() {
+    this.filterPanelVisibility = !this.filterPanelVisibility;
+  }
+
+  onSortClick() {}
 }
