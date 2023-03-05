@@ -6,5 +6,6 @@ import { StoreModule } from '@ngrx/store';
 @NgModule({
   declarations: [TableComponent],
   imports: [CommonModule, StoreModule],
+  exports: [TableComponent],
 })
 export class TableModule {}
