@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Column } from '../model/column';
+import { TableFilterEventService } from '../services/table-filter-event.service';
+import { TableSourceService } from '../services/table-source.service';
 
 @Component({
   selector: 'app-table-header',
@@ -12,12 +14,21 @@ export class TableHeaderComponent implements OnInit {
 
   filterPanelVisibility: boolean = false;
 
-  constructor() {}
+  constructor(private filterEventService: TableFilterEventService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.filterEventService.closeAll$.subscribe((exept) => {
+      if (exept.tableId == this.tableIndex && exept.column == this.value) {
+        this.filterPanelVisibility = true;
+      } else {
+        this.filterPanelVisibility = false;
+      }
+    });
+  }
 
   onFilterClick() {
-    this.filterPanelVisibility = !this.filterPanelVisibility;
+    this.filterEventService.closeAllExept(this.tableIndex, this.value);
+    this.filterEventService.registerEvent(this.tableIndex, this.value);
   }
 
   onSortClick() {}

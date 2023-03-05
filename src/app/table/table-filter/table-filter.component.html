@@ -1,1 +1,28 @@
-<div class="wrapper"></div>
+<div class="wrapper">
+  <div class="input">
+    <span class="p-input-icon-left">
+      <input
+        type="text"
+        class="p-inputtext-sm"
+        [(ngModel)]="filterInput"
+        placeholder="Фильтр"
+        pInputText
+      />
+    </span>
+  </div>
+
+  <div class="values scrollable-element">
+    <div class="value" *ngFor="let value of dataShunkToShow; let i = index">
+      <div class="checkbox">
+        <p-checkbox
+          name="groupname"
+          value="{{ value[column.column] }}"
+          inputId="i"
+        ></p-checkbox>
+      </div>
+      <div class="label">
+        {{ value[column.column] }}
+      </div>
+    </div>
+  </div>
+</div>

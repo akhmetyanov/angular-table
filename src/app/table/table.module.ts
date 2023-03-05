@@ -6,11 +6,25 @@ import { TableRegisterService } from './services/table-register.service';
 import { TableSourceService } from './services/table-source.service';
 import { TableHeaderComponent } from './table-header/table-header.component';
 import { TableFilterComponent } from './table-filter/table-filter.component';
+import { TableFilterEventService } from './services/table-filter-event.service';
+import { FormsModule } from '@angular/forms';
+import { InputTextModule } from 'primeng/inputtext';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @NgModule({
   declarations: [TableComponent, TableHeaderComponent, TableFilterComponent],
-  imports: [CommonModule, StoreModule],
+  imports: [
+    CommonModule,
+    StoreModule,
+    FormsModule,
+    InputTextModule,
+    CheckboxModule,
+  ],
   exports: [TableComponent],
-  providers: [TableRegisterService, TableSourceService],
+  providers: [
+    TableRegisterService,
+    TableSourceService,
+    TableFilterEventService,
+  ],
 })
 export class TableModule {}

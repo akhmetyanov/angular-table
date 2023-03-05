@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Column } from '../model/column';
 import { ServerSideSource } from '../model/server-side-source';
 import { TableDataStoreService } from './table-data-store.service';
 
@@ -11,5 +12,12 @@ export class TableSourceService {
     return new ServerSideSource(data, pageSize);
   }
 
-  buildFilterSource() {}
+  buildFilterSource(tableId: number, pageSize: number, column: Column) {
+    const data = this.dataStore.get(tableId).map((value) => {
+      let o: any = {};
+      o[column.column] = value[column.column];
+      return o;
+    });
+    return new ServerSideSource(data, pageSize, true);
+  }
 }
