@@ -56,6 +56,5 @@ export class TableComponent implements OnInit, OnChanges {
     this.dataStoreService.add(this.id, this.dataSource);
     this.source = this.sourceService.buildTableSource(this.id, this.pageSize);
     this.showDataShunk = this.source.current();
-    console.log(this.showDataShunk);
   }
 }
