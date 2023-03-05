@@ -18,9 +18,13 @@ import { TableSourceService } from '../services/table-source.service';
 export class TableComponent implements OnInit, OnChanges {
   @Input() pageSize: number = 500;
   @Input() dataSource: any[] = [];
+  @Input() columnNames: any = {};
 
   private source!: Source;
   private id: number = -1;
+
+  columns: string[] = [];
+  showDataShunk: any[] = [];
 
   constructor(
     private registerService: TableRegisterService,
@@ -31,6 +35,7 @@ export class TableComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.id = this.registerService.registerTable();
     this.initSource();
+    this.initColumnNames();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -41,8 +46,16 @@ export class TableComponent implements OnInit, OnChanges {
     }
   }
 
+  private initColumnNames() {
+    this.columns = Object.keys(this.columnNames).map(
+      (key: string) => this.columnNames[key]
+    );
+  }
+
   private initSource() {
     this.dataStoreService.add(this.id, this.dataSource);
     this.source = this.sourceService.buildTableSource(this.id, this.pageSize);
+    this.showDataShunk = this.source.current();
+    console.log(this.showDataShunk);
   }
 }

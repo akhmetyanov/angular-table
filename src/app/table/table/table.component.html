@@ -1,1 +1,18 @@
-<p>table works!</p>
+<div class="wrapper">
+  <table>
+    <thead>
+      <tr>
+        <th *ngFor="let column of columns">
+          {{ column }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of showDataShunk">
+        <td *ngFor="let column of columns">
+          {{ row[column] }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,5 +1,9 @@
 <div class="wrapper">
   <div class="table">
-    <app-table [pageSize]="1000" [dataSource]="data"></app-table>
+    <app-table
+      [pageSize]="200"
+      [dataSource]="data"
+      [columnNames]="columnNames"
+    ></app-table>
   </div>
 </div>
