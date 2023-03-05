@@ -5,6 +5,7 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
+import { Column } from '../model/column';
 import { Source } from '../model/source';
 import { TableDataStoreService } from '../services/table-data-store.service';
 import { TableRegisterService } from '../services/table-register.service';
@@ -18,12 +19,11 @@ import { TableSourceService } from '../services/table-source.service';
 export class TableComponent implements OnInit, OnChanges {
   @Input() pageSize: number = 500;
   @Input() dataSource: any[] = [];
-  @Input() columnNames: any = {};
+  @Input() columns: Column[] = [];
 
   private source!: Source;
-  private id: number = -1;
+  id: number = -1;
 
-  columns: string[] = [];
   showDataShunk: any[] = [];
 
   constructor(
@@ -35,7 +35,6 @@ export class TableComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.id = this.registerService.registerTable();
     this.initSource();
-    this.initColumnNames();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -44,12 +43,6 @@ export class TableComponent implements OnInit, OnChanges {
     ) {
       this.initSource();
     }
-  }
-
-  private initColumnNames() {
-    this.columns = Object.keys(this.columnNames).map(
-      (key: string) => this.columnNames[key]
-    );
   }
 
   private initSource() {

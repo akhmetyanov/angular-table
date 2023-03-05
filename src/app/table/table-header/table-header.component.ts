@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Column } from '../model/column';
 
 @Component({
   selector: 'app-table-header',
@@ -6,7 +7,8 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./table-header.component.css'],
 })
 export class TableHeaderComponent implements OnInit {
-  @Input() value: string = '';
+  @Input() value!: Column;
+  @Input() tableIndex!: number;
 
   constructor() {}
 

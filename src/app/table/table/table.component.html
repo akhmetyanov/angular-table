@@ -3,14 +3,17 @@
     <thead>
       <tr>
         <th *ngFor="let column of columns">
-          <app-table-header [value]="column"></app-table-header>
+          <app-table-header
+            [value]="column"
+            [tableIndex]="id"
+          ></app-table-header>
         </th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let row of showDataShunk">
         <td *ngFor="let column of columns">
-          {{ row[column] }}
+          {{ row[column.column] }}
         </td>
       </tr>
     </tbody>

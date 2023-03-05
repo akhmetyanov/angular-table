@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Column } from 'src/app/table/model/column';
 
 export interface TestData {
   country: string;
@@ -58,7 +59,7 @@ export interface TestData {
 })
 export class TestPageComponent implements OnInit {
   data: TestData[] = [];
-  columnNames = {
+  columnNames: any = {
     country: 'country',
     year: 'year',
     population: 'population',
@@ -108,6 +109,7 @@ export class TestPageComponent implements OnInit {
     share_global_luc_co2: 'share_global_luc_co2',
     share_global_oil_co2: 'share_global_oil_co2',
   };
+  columns: Column[] = [];
 
   constructor(private http: HttpClient) {}
 
@@ -122,5 +124,9 @@ export class TestPageComponent implements OnInit {
       });
       this.data = testData;
     });
+
+    this.columns = Object.keys(this.columnNames).map(
+      (key: string) => new Column(key, this.columnNames[key])
+    );
   }
 }
