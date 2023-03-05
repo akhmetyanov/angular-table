@@ -1,0 +1,26 @@
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  user-select: none;
+}
+
+.pi {
+  font-size: 0.7rem;
+  visibility: hidden;
+}
+
+.wrapper:hover .pi {
+  visibility: visible;
+}
+
+.pi:hover {
+  cursor: pointer;
+}
+
+.filter {
+  margin: 0rem 1rem;
+}
+
+.sort {
+  margin-left: auto;
+}
