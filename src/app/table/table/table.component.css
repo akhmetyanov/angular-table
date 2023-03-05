@@ -3,3 +3,18 @@
   width: 100%;
   overflow: auto;
 }
+
+table {
+  position: relative;
+}
+
+th,
+td {
+  padding: 0.25rem;
+}
+
+th {
+  background: white;
+  position: sticky;
+  top: 0; /* Don't forget this, required for the stickiness */
+}

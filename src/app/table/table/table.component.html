@@ -3,7 +3,7 @@
     <thead>
       <tr>
         <th *ngFor="let column of columns">
-          {{ column }}
+          <app-table-header [value]="column"></app-table-header>
         </th>
       </tr>
     </thead>
