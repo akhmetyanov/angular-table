@@ -28,7 +28,7 @@ export class TableHeaderComponent implements OnInit {
 
   onFilterClick() {
     this.filterEventService.closeAllExept(this.tableIndex, this.value);
-    this.filterEventService.registerEvent(this.tableIndex, this.value);
+    this.filterEventService.createSource(this.tableIndex, this.value);
   }
 
   onSortClick() {}

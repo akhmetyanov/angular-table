@@ -17,7 +17,7 @@ export class TableFilterEventService {
 
   constructor(private sourceService: TableSourceService) {}
 
-  registerEvent(tableId: number, column: Column) {
+  createSource(tableId: number, column: Column) {
     if (
       this.filterSources[tableId] &&
       this.filterSources[tableId][column.column]
