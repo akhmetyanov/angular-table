@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { take } from 'rxjs';
 import { Column } from '../model/column';
 import { Source } from '../model/source';
+import { SourceFilterType } from '../model/source-filter-state';
 import { TableFilterEventService } from '../services/table-filter-event.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class TableFilterComponent implements OnInit {
   source: Source | undefined;
   dataShunkToShow: any[] = [];
   filterInput: string = '';
-  constructor(private filterEventService: TableFilterEventService) {}
+  constructor(private filterEventService: TableFilterEventService) { }
 
   ngOnInit(): void {
     this.filterEventService.filterSources$.pipe(take(1)).subscribe((fs) => {
@@ -23,5 +24,16 @@ export class TableFilterComponent implements OnInit {
       this.source = fs[this.tableId][this.column.column];
       this.dataShunkToShow = this.source.current();
     });
+  }
+
+  onInput() {
+    if (this.filterInput === '') {
+      this.source?.filterState.clearState();
+    } else {
+      this.source?.filterState.setFilter(this.column, this.filterInput, SourceFilterType.contains);
+    }
+    
+    if (this.source)
+      this.dataShunkToShow = this.source.current();
   }
 }

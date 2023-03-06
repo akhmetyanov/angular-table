@@ -6,7 +6,7 @@ export class SourceState {
     this.top = pageSize;
     this.skip = 0;
   }
-
+  
   getState() {
     return { from: this.skip, to: this.skip + this.top };
   }
