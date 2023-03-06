@@ -19,6 +19,8 @@
           name="groupname"
           value="{{ value[column.column] }}"
           inputId="i"
+          [(ngModel)]="selectedValues"
+          (ngModelChange)="onSelectValue()"
         ></p-checkbox>
       </div>
       <div class="label">

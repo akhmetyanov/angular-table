@@ -2,7 +2,8 @@ import { Column } from "./column"
 
 export enum SourceFilterType {
     contains = 'contains',
-    equal = 'eq'
+    equal = 'eq',
+    in = 'in'
 }
 
 export interface SourceFilterValue {

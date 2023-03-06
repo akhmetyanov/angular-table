@@ -36,6 +36,11 @@ export class ServerSideSource implements Source {
               res = String(val[fState[key].column.column]).toLowerCase() === String(fState[key].value).toLowerCase();
               break;
             }
+            case SourceFilterType.in: {
+              let arr = Array.isArray(fState[key].value) ? fState[key].value : [fState[key].value];
+              res = arr.includes(String(val[fState[key].column.column]))
+              break;
+            }
           }
           if (!res) break;
         }

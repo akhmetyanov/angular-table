@@ -8,6 +8,7 @@ import {
 import { Column } from '../model/column';
 import { Source } from '../model/source';
 import { TableDataStoreService } from '../services/table-data-store.service';
+import { TableFilterEventService } from '../services/table-filter-event.service';
 import { TableRegisterService } from '../services/table-register.service';
 import { TableSourceService } from '../services/table-source.service';
 
@@ -29,12 +30,24 @@ export class TableComponent implements OnInit, OnChanges {
   constructor(
     private registerService: TableRegisterService,
     private sourceService: TableSourceService,
-    private dataStoreService: TableDataStoreService
+    private dataStoreService: TableDataStoreService,
+    private filterEventService: TableFilterEventService
   ) {}
 
   ngOnInit(): void {
     this.id = this.registerService.registerTable();
     this.initSource();
+    this.filterEventService.filterEvents$.subscribe(fEvents => {
+      if (!Object.keys(fEvents).includes(String(this.id))) return;
+      for (const column in fEvents[this.id]) {
+        this.source.filterState.setFilter(
+          fEvents[this.id][column].column, 
+          fEvents[this.id][column].value, 
+          fEvents[this.id][column].type
+          )
+      }
+      this.showDataShunk = this.source.current();
+    })
   }
 
   ngOnChanges(changes: SimpleChanges): void {

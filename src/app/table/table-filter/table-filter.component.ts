@@ -13,9 +13,12 @@ import { TableFilterEventService } from '../services/table-filter-event.service'
 export class TableFilterComponent implements OnInit {
   @Input() tableId!: number;
   @Input() column!: Column;
+
   source: Source | undefined;
   dataShunkToShow: any[] = [];
   filterInput: string = '';
+  selectedValues: string[] = [];
+  
   constructor(private filterEventService: TableFilterEventService) { }
 
   ngOnInit(): void {
@@ -24,6 +27,10 @@ export class TableFilterComponent implements OnInit {
       this.source = fs[this.tableId][this.column.column];
       this.dataShunkToShow = this.source.current();
     });
+    this.filterEventService.filterEvents$.subscribe(fEvents => {
+      if (!fEvents[this.tableId] || !fEvents[this.tableId][this.column.column]) return;
+      this.selectedValues = fEvents[this.tableId][this.column.column].value
+    })
   }
 
   onInput() {
@@ -35,5 +42,9 @@ export class TableFilterComponent implements OnInit {
     
     if (this.source)
       this.dataShunkToShow = this.source.current();
+  }
+
+  onSelectValue() {
+    this.filterEventService.registerEvent(this.tableId, this.column, this.selectedValues)
   }
 }
