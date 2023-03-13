@@ -1,8 +1,11 @@
 .wrapper {
+  position: relative;
+}
+
+.content {
   display: flex;
   justify-content: space-between;
   user-select: none;
-  position: relative;
 }
 
 .pi {
@@ -10,8 +13,12 @@
   visibility: hidden;
 }
 
-.wrapper:hover .pi {
+.content:hover .pi {
   visibility: visible;
+}
+
+.filter-panel:hover .pi {
+  visibility: hidden;
 }
 
 .pi:hover {

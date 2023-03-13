@@ -1,21 +1,25 @@
 <div class="wrapper">
-  <div>
-    {{ value.header }}
-  </div>
-  <div class="filter">
-    <i
-      class="pi pi-filter"
-      [ngStyle]="{ visibility: filterPanelVisibility ? 'visible' : '' }"
-      (click)="onFilterClick()"
-    ></i>
-  </div>
-  <div class="sort">
-    <i class="pi pi-sort-alt" (click)="onSortClick()"></i>
+  <div class="content">
+    <div>
+      {{ value.header }}
+    </div>
+    <div class="filter">
+      <i
+        class="pi pi-filter"
+        [ngStyle]="{ visibility: filterPanelVisibility ? 'visible' : '' }"
+        (click)="onFilterClick()"
+      ></i>
+    </div>
+    <div class="sort">
+      <i class="pi pi-sort-alt" (click)="onSortClick()"></i>
+    </div>
   </div>
 
+
   <app-table-filter
-    *ngIf="filterPanelVisibility"
-    [tableId]="tableIndex"
-    [column]="value"
-  ></app-table-filter>
+  *ngIf="filterPanelVisibility"
+  [tableId]="tableIndex"
+  [column]="value"
+></app-table-filter>
+
 </div>
