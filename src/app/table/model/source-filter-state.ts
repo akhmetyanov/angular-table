@@ -1,3 +1,4 @@
+import { trigger } from "@angular/animations";
 import { Column } from "./column"
 
 export enum SourceFilterType {
@@ -16,7 +17,11 @@ export class SourceFilterState {
     private state: Record<string, SourceFilterValue> = {};
 
     hasState() {
-        return Object.keys(this.state).length > 0
+        let hasState: boolean = false;
+        for (const column of Object.keys(this.state)) {
+            if (this.state[column].value.length) hasState = true;
+        }
+        return hasState
     }
 
     setFilter(column: Column, value: any, type: SourceFilterType) {

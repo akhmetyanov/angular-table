@@ -18,9 +18,9 @@ export class TableSourceService {
 
   buildFilterSource(tableId: number, pageSize: number, column: Column) {
     const data = this.dataStore.get(tableId)
-    const source = new ServerSideSource(data, pageSize, true) 
+    const source = new ServerSideSource(data, pageSize, true, [column.column]) 
     const originTableSource = this.sources[tableId];
-    if (originTableSource && originTableSource instanceof ServerSideSource) {
+    if (originTableSource) {
       source.filterState = originTableSource.filterState
     }
     return source;
