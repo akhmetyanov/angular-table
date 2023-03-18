@@ -45,3 +45,19 @@
 .scrollable-element {
   scrollbar-width: thin;
 }
+
+.clear-filters {
+  margin-top: 0.4rem;
+  align-self: flex-start;
+}
+
+.clear-filters > .label {
+  font-size: 0.8em;
+  user-select: none;
+}
+
+.clear-filters > .label:hover {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}

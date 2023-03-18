@@ -47,4 +47,8 @@ export class TableFilterComponent implements OnInit {
   onSelectValue() {
     this.filterEventService.registerEvent(this.tableId, this.column, this.selectedValues)
   }
+
+  onClearClick() {
+    this.filterEventService.registerEvent(this.tableId, this.column, [])
+  }
 }
