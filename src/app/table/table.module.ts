@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [TableComponent, TableHeaderComponent, TableFilterComponent],
@@ -20,7 +21,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     FormsModule,
     InputTextModule,
     CheckboxModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    ScrollingModule
   ],
   exports: [TableComponent],
   providers: [

@@ -25,7 +25,7 @@ export class TableFilterComponent implements OnInit {
     this.filterEventService.filterSources$.pipe(take(1)).subscribe((fs) => {
       if (!fs[this.tableId] || !fs[this.tableId][this.column.column]) return;
       this.source = fs[this.tableId][this.column.column];
-      this.dataShunkToShow = this.source.current();
+      this.dataShunkToShow = this.source.all();
     });
     this.filterEventService.filterEvents$.subscribe(fEvents => {
       if (!fEvents[this.tableId] || !fEvents[this.tableId][this.column.column]) return;
@@ -41,7 +41,7 @@ export class TableFilterComponent implements OnInit {
     }
     
     if (this.source)
-      this.dataShunkToShow = this.source.current();
+      this.dataShunkToShow = this.source.all();
   }
 
   onSelectValue() {
@@ -53,12 +53,12 @@ export class TableFilterComponent implements OnInit {
   }
 
   onScrollUp( ) {
-    const sliceSize = this.dataShunkToShow.length / 2
-    this.dataShunkToShow = (this.source?.previos() ?? []).concat(this.dataShunkToShow.slice(0, sliceSize)) 
+    // const sliceSize = this.dataShunkToShow.length / 2
+    // this.dataShunkToShow = (this.source?.previos() ?? []).concat(this.dataShunkToShow.slice(0, sliceSize)) 
   }
 
   onScroll() {
-    const sliceSize = this.dataShunkToShow.length / 2
-    this.dataShunkToShow = this.dataShunkToShow.slice(sliceSize).concat(this.source?.next() ?? [])
+    // const sliceSize = this.dataShunkToShow.length / 2
+    // this.dataShunkToShow = this.dataShunkToShow.slice(sliceSize).concat(this.source?.next() ?? [])
   }
 }
