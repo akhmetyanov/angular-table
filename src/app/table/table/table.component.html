@@ -1,4 +1,4 @@
-<div class="wrapper" infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollUpDistance]="0.5" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" (scrolledUp)="onScrollUp()"
+<!-- <div class="wrapper" infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollUpDistance]="0.5" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" (scrolledUp)="onScrollUp()"
 [scrollWindow]="false">
   <table>
     <thead>
@@ -19,4 +19,47 @@
       </tr>
     </tbody>
   </table>
-</div>
+</div> -->
+
+<cdk-virtual-scroll-viewport 
+  class="wrapper"
+  [itemSize]="10"
+>
+  <table>
+    <thead>
+      <tr>
+        <th *ngFor="let column of columns">
+          <app-table-header
+            [value]="column"
+            [tableIndex]="id"
+          ></app-table-header>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *cdkVirtualFor="let row of showDataShunk; trackBy: trackByFn">
+        <td *ngFor="let column of columns">
+          {{ row[column.column] }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</cdk-virtual-scroll-viewport>
+
+<!-- 
+<cdk-virtual-scroll-viewport [itemSize]="20">
+  <table>
+    <thead>
+      <tr>
+        <td>Name</td>
+        <td>ID</td>
+      </tr>   
+    </thead>
+    <tbody>
+      <tr *cdkVirtualFor="let row of tableData">
+        <td>{{row.name}}</td>
+        <td>{{row.id}}</td>
+      </tr>
+    </tbody>
+  </table>
+</cdk-virtual-scroll-viewport> -->

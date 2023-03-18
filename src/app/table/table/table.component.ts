@@ -63,7 +63,7 @@ export class TableComponent implements OnInit, OnChanges {
     this.dataSource.forEach((d, i) => d['_rowId'] = i)
     this.dataStoreService.add(this.id, this.dataSource);
     this.source = this.sourceService.buildTableSource(this.id, this.pageSize);
-    this.showDataShunk = this.source.current();
+    this.showDataShunk = this.source.all();
   }
 
   trackByFn(index: number, item: any) {   
