@@ -25,7 +25,7 @@ export class ServerSideSource implements Source {
 
     if (this.filterState.hasState()) {
       const fState = this.filterState.getState();
-      debugger
+      console.log('fState', fState)
       values = filter(values, (val) => {
         let res: boolean = true;
         for (const key in fState) {
@@ -40,7 +40,7 @@ export class ServerSideSource implements Source {
             }
             case SourceFilterType.in: {
               let arr = Array.isArray(fState[key].value) ? fState[key].value : [fState[key].value];
-              res = arr.includes(String(val[fState[key].column.column]))
+              res = arr.length ? arr.includes(String(val[fState[key].column.column])) : true;
               break;
             }
           }

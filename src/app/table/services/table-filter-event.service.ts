@@ -27,8 +27,6 @@ export class TableFilterEventService {
       this.filterSources[tableId][column.column]
     ) {
       delete this.filterSources[tableId][column.column];
-      this.filterSources$.next(this.filterSources);
-      return;
     }
 
     if (!this.filterSources[tableId]) this.filterSources[tableId] = {};
