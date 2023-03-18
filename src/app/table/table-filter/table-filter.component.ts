@@ -53,12 +53,12 @@ export class TableFilterComponent implements OnInit {
   }
 
   onScrollUp( ) {
-    const sliceSize = this.dataShunkToShow.length / 3
-    this.dataShunkToShow = this.dataShunkToShow.slice(0, sliceSize).concat(this.source?.previos() ?? [])
+    const sliceSize = this.dataShunkToShow.length / 2
+    this.dataShunkToShow = (this.source?.previos() ?? []).concat(this.dataShunkToShow.slice(0, sliceSize)) 
   }
 
   onScroll() {
-    const sliceSize = this.dataShunkToShow.length / 3
+    const sliceSize = this.dataShunkToShow.length / 2
     this.dataShunkToShow = this.dataShunkToShow.slice(sliceSize).concat(this.source?.next() ?? [])
   }
 }

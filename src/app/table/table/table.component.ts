@@ -72,7 +72,7 @@ export class TableComponent implements OnInit, OnChanges {
 
   onScrollUp( ) {
     const sliceSize = this.pageSize / 3
-    this.showDataShunk = this.showDataShunk.slice(0, sliceSize).concat(this.source.previos())
+    this.showDataShunk = this.source.previos().concat(this.showDataShunk.slice(0, sliceSize))
   }
 
   onScroll() {
