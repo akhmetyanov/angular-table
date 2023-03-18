@@ -10,6 +10,7 @@ import { TableFilterEventService } from './services/table-filter-event.service';
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { CheckboxModule } from 'primeng/checkbox';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [TableComponent, TableHeaderComponent, TableFilterComponent],
@@ -19,6 +20,7 @@ import { CheckboxModule } from 'primeng/checkbox';
     FormsModule,
     InputTextModule,
     CheckboxModule,
+    InfiniteScrollModule
   ],
   exports: [TableComponent],
   providers: [
