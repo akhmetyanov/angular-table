@@ -12,7 +12,8 @@
     </span>
   </div>
 
-  <div class="values scrollable-element">
+  <div class="values scrollable-element" infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollUpDistance]="0.5" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" (scrolledUp)="onScrollUp()"
+  [scrollWindow]="false">
     <div class="value" *ngFor="let value of dataShunkToShow; let i = index">
       <div class="checkbox">
         <p-checkbox

@@ -51,4 +51,14 @@ export class TableFilterComponent implements OnInit {
   onClearClick() {
     this.filterEventService.registerEvent(this.tableId, this.column, [])
   }
+
+  onScrollUp( ) {
+    const sliceSize = this.dataShunkToShow.length / 3
+    this.dataShunkToShow = this.dataShunkToShow.slice(0, sliceSize).concat(this.source?.previos() ?? [])
+  }
+
+  onScroll() {
+    const sliceSize = this.dataShunkToShow.length / 3
+    this.dataShunkToShow = this.dataShunkToShow.slice(sliceSize).concat(this.source?.next() ?? [])
+  }
 }
