@@ -1,4 +1,5 @@
-<div class="wrapper">
+<div class="wrapper" infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollUpDistance]="0.5" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" (scrolledUp)="onScrollUp()"
+[scrollWindow]="false">
   <table>
     <thead>
       <tr>
@@ -11,7 +12,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let row of showDataShunk">
+      <tr *ngFor="let row of showDataShunk; trackBy: trackByFn">
         <td *ngFor="let column of columns">
           {{ row[column.column] }}
         </td>

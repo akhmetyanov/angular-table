@@ -5,6 +5,7 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
+import { cloneDeep } from 'lodash';
 import { Column } from '../model/column';
 import { Source } from '../model/source';
 import { TableDataStoreService } from '../services/table-data-store.service';
@@ -59,8 +60,23 @@ export class TableComponent implements OnInit, OnChanges {
   }
 
   private initSource() {
+    this.dataSource.forEach((d, i) => d['_rowId'] = i)
     this.dataStoreService.add(this.id, this.dataSource);
     this.source = this.sourceService.buildTableSource(this.id, this.pageSize);
     this.showDataShunk = this.source.current();
+  }
+
+  trackByFn(index: number, item: any) {   
+    return item._rowId;
+  }
+
+  onScrollUp( ) {
+    const sliceSize = this.pageSize / 3
+    this.showDataShunk = this.showDataShunk.slice(0, sliceSize).concat(this.source.previos())
+  }
+
+  onScroll() {
+    const sliceSize = this.pageSize / 3
+    this.showDataShunk = this.showDataShunk.slice(sliceSize).concat(this.source.next())
   }
 }
