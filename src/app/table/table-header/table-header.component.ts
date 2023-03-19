@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Column } from '../model/column';
 import { TableFilterEventService } from '../services/table-filter-event.service';
+import { TableSortEventService } from '../services/table-sort-event.service';
 import { TableSourceService } from '../services/table-source.service';
 
 @Component({
@@ -14,7 +15,7 @@ export class TableHeaderComponent implements OnInit {
 
   filterPanelVisibility: boolean = false;
 
-  constructor(private filterEventService: TableFilterEventService) {}
+  constructor(private filterEventService: TableFilterEventService, private sortEventService: TableSortEventService) {}
 
   ngOnInit(): void {
     this.filterEventService.closeAll$.subscribe((exept) => {
@@ -31,5 +32,7 @@ export class TableHeaderComponent implements OnInit {
     this.filterEventService.createSource(this.tableIndex, this.value);
   }
 
-  onSortClick() {}
+  onSortClick() {
+    this.sortEventService.registerEvent(this.tableIndex, this.value)
+  }
 }

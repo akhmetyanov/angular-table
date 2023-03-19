@@ -2,6 +2,7 @@ import { Source } from './source';
 import { SourceState } from './source-state';
 import { cloneDeep, filter, orderBy, sortedUniqBy, unionBy, uniqBy, uniqWith } from 'lodash';
 import { SourceFilterState, SourceFilterType } from './source-filter-state';
+import { SourceSortState } from './source-sort-state';
 
 export class ServerSideSource implements Source {
   private values: any[];
@@ -10,6 +11,7 @@ export class ServerSideSource implements Source {
   private distinct: boolean;
 
   filterState: SourceFilterState;
+  sortState: SourceSortState
 
   constructor(values: any[], pageSize: number, distinct: boolean = false, select: string[] = []) {
     this.values = values;
@@ -17,6 +19,7 @@ export class ServerSideSource implements Source {
     this.distinct = distinct;
     this.state = new SourceState(pageSize);
     this.filterState = new SourceFilterState();
+    this.sortState = new SourceSortState();
   }
 
   all() {
@@ -50,7 +53,6 @@ export class ServerSideSource implements Source {
       })
     }
 
-    const state = this.state.getState();
     if (this.distinct && this.select.length) {
       values = uniqWith(values, (a, b) => {
         for (const field of this.select) {
@@ -58,6 +60,13 @@ export class ServerSideSource implements Source {
         }
         return true;
       })
+    }
+
+    if (this.sortState.hasState()) {
+      console.log(this.sortState)
+      const sortList = Object.keys(this.sortState.state)
+      const directions = sortList.map(col => this.sortState.state[col])
+      values = orderBy(values, sortList, directions);
     }
 
     return values;

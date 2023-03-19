@@ -13,6 +13,7 @@ import { Source } from '../model/source';
 import { TableDataStoreService } from '../services/table-data-store.service';
 import { TableFilterEventService } from '../services/table-filter-event.service';
 import { TableRegisterService } from '../services/table-register.service';
+import { TableSortEventService } from '../services/table-sort-event.service';
 import { TableSourceService } from '../services/table-source.service';
 
 @Component({
@@ -34,7 +35,8 @@ export class TableComponent implements OnInit, OnChanges {
     private registerService: TableRegisterService,
     private sourceService: TableSourceService,
     private dataStoreService: TableDataStoreService,
-    private filterEventService: TableFilterEventService
+    private filterEventService: TableFilterEventService,
+    private sortEventService: TableSortEventService,
   ) { }
 
   ngOnInit(): void {
@@ -49,7 +51,12 @@ export class TableComponent implements OnInit, OnChanges {
           fEvents[this.id][column].type
         )
       }
-      this.showDataShunk = this.source.current();
+      this.showDataShunk = this.source.all();
+    })
+    this.sortEventService.events$.subscribe(sEvents => {
+      if (!sEvents[this.id]) return
+      this.source.sortState.setState(sEvents[this.id]);
+      this.showDataShunk = this.source.all();
     })
   }
 
