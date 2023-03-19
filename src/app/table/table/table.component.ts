@@ -83,18 +83,4 @@ export class TableComponent implements OnInit, OnChanges {
   trackByFn(index: number, item: any) {
     return item._rowId;
   }
-
-  onScrollUp() {
-    const sliceSize = this.pageSize / 3
-    const previos = this.source.previos();
-    if (!previos.length) return
-    this.showDataShunk = previos.concat(this.showDataShunk.slice(0, sliceSize))
-  }
-
-  onScroll() {
-    const sliceSize = this.pageSize / 3
-    const next = this.source.next();
-    if (!next.length) return
-    this.showDataShunk = this.showDataShunk.slice(this.showDataShunk.length - sliceSize).concat(next)
-  }
 }

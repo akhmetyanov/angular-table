@@ -12,24 +12,6 @@
     </span>
   </div>
 
-  <!-- <div class="values scrollable-element" infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollUpDistance]="0.5" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" (scrolledUp)="onScrollUp()"
-  [scrollWindow]="false">
-    <div class="value" *ngFor="let value of dataShunkToShow; let i = index">
-      <div class="checkbox">
-        <p-checkbox
-          name="groupname"
-          value="{{ value[column.column] }}"
-          inputId="i"
-          [(ngModel)]="selectedValues"
-          (ngModelChange)="onSelectValue()"
-        ></p-checkbox>
-      </div>
-      <div class="label">
-        {{ value[column.column] }}
-      </div>
-    </div>
-  </div> -->
-
   <cdk-virtual-scroll-viewport itemSize="30" class="values">
     <div *cdkVirtualFor="let value of dataShunkToShow; let i = index" class="value">
       <div class="checkbox">
