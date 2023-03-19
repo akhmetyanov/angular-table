@@ -1,9 +1,11 @@
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import {
   Component,
   Input,
   OnInit,
   OnChanges,
   SimpleChanges,
+  ViewChild,
 } from '@angular/core';
 import { cloneDeep } from 'lodash';
 import { Column } from '../model/column';
@@ -33,7 +35,7 @@ export class TableComponent implements OnInit, OnChanges {
     private sourceService: TableSourceService,
     private dataStoreService: TableDataStoreService,
     private filterEventService: TableFilterEventService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.id = this.registerService.registerTable();
@@ -42,10 +44,10 @@ export class TableComponent implements OnInit, OnChanges {
       if (!Object.keys(fEvents).includes(String(this.id))) return;
       for (const column in fEvents[this.id]) {
         this.source.filterState.setFilter(
-          fEvents[this.id][column].column, 
-          fEvents[this.id][column].value, 
+          fEvents[this.id][column].column,
+          fEvents[this.id][column].value,
           fEvents[this.id][column].type
-          )
+        )
       }
       this.showDataShunk = this.source.current();
     })
@@ -59,6 +61,18 @@ export class TableComponent implements OnInit, OnChanges {
     }
   }
 
+  @ViewChild(CdkVirtualScrollViewport)
+  public viewPort!: CdkVirtualScrollViewport;
+
+
+  public get inverseOfTranslation(): string {
+    if (!this.viewPort || !this.viewPort["_renderedContentOffset"]) {
+      return "-0px";
+    }
+    let offset = this.viewPort["_renderedContentOffset"];
+    return `-${offset}px`;
+  }
+
   private initSource() {
     this.dataSource.forEach((d, i) => d['_rowId'] = i)
     this.dataStoreService.add(this.id, this.dataSource);
@@ -66,11 +80,11 @@ export class TableComponent implements OnInit, OnChanges {
     this.showDataShunk = this.source.all();
   }
 
-  trackByFn(index: number, item: any) {   
+  trackByFn(index: number, item: any) {
     return item._rowId;
   }
 
-  onScrollUp( ) {
+  onScrollUp() {
     const sliceSize = this.pageSize / 3
     const previos = this.source.previos();
     if (!previos.length) return
